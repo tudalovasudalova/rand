@@ -1,0 +1,66 @@
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>Выбор карты</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <style type="text/css">
+    body{
+      background-color: #fff;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+<div class="row">
+  <form id="main-form" class="col s12">
+    <div class="input-field col s12">
+      <input id="seed" type="text" class="validate" name="seed" pattern="^[0-9]+$">
+      <label for="seed">Игрок</label>
+    </div>
+    <div class="input-field col s12">
+      <input id="min" type="text" class="validate" name="min" pattern="^[0-9]+$">
+      <label for="min">Min</label>
+    </div>
+    <div class="input-field col s12">
+      <input id="max" type="text" class="validate" name="max" pattern="^[0-9]+$">
+      <label for="max">Max</label>
+    </div>
+    <div class="center s6">
+      <a class="waves-effect waves-light btn" type="submit" onclick="onSubmit()">
+        Вселенная
+      </a>
+    </div>
+  </form>
+</div>
+
+<div class="center">
+<h5 class="teal-text">Карта:</h5>
+<h4 id="result-out"></h4>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<script>
+
+function getRandomInt(seed, min, max) {
+  seed = Math.ceil(seed);
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  const rnd = seed + Math.ceil(Math.random() * 2147483648)
+  return rnd % (max - min + 1) + min;
+}
+
+function onSubmit() {
+  const form = document.getElementById('main-form')
+  const formData = new FormData(form)
+  const min = formData.get('min')
+  const max = formData.get('max')
+  const seed = formData.get('seed')
+  const res = document.getElementById('result-out')
+  res.innerHTML = getRandomInt(seed, min, max);
+}
+
+</script>
+
+</body>
+</html>
